@@ -531,6 +531,59 @@ func (s *Shell) PubSubPublish(topic, data string) (err error) {
 	return nil
 }
 
+func (s *Shell) P2pClose(all bool, protocol, listen, target string) (err error) {
+	var resp *Response
+	if all {
+		resp, err = s.Request("p2p/close").
+			Option("all", all).
+			Send(context.Background())
+	} else {
+		resp, err = s.Request("p2p/close").
+			Option("protocol", protocol).
+			Option("listen-address", listen).
+			Option("target-address", target).
+			Send(context.Background())
+	}
+
+	if err != nil {
+		return err
+	}
+	defer resp.Close()
+	if resp.Error != nil {
+		return resp.Error
+	}
+	return nil
+}
+
+func (s *Shell) P2pListen(protocol, target string, custom, report bool) error {
+	resp, err := s.Request("p2p/listen", protocol, target).
+		Option("allow-custom-protocol", custom).
+		Option("report-peer-id", report).
+		Send(context.Background())
+	if err != nil {
+		return err
+	}
+	defer resp.Close()
+	if resp.Error != nil {
+		return resp.Error
+	}
+	return nil
+}
+
+func (s *Shell) P2pForward(protocol, listen, target string, custom bool) error {
+	resp, err := s.Request("p2p/forward", protocol, listen, target).
+		Option("allow-custom-protocol", custom).
+		Send(context.Background())
+	if err != nil {
+		return err
+	}
+	defer resp.Close()
+	if resp.Error != nil {
+		return resp.Error
+	}
+	return nil
+}
+
 type ObjectStats struct {
 	Hash           string
 	BlockSize      int
