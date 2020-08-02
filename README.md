@@ -14,7 +14,7 @@
 ## Install
 
 ```sh
-go get -u github.com/ipfs/go-ipfs-api
+go get -u github.com/tearust/tea-go-ipfs-api
 ```
 
 This will download the source into `$GOPATH/src/github.com/ipfs/go-ipfs-api`.
