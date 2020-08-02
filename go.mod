@@ -1,9 +1,10 @@
 go 1.13
 
-module github.com/ipfs/go-ipfs-api
+module github.com/tearust/tea-go-ipfs-api
 
 require (
 	github.com/cheekybits/is v0.0.0-20150225183255-68e9c0620927
+	github.com/ipfs/go-ipfs-api v0.1.0
 	github.com/ipfs/go-ipfs-files v0.0.8
 	github.com/ipfs/go-ipfs-util v0.0.2
 	github.com/libp2p/go-libp2p-core v0.5.7
